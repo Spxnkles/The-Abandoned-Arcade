@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: f1d1751227d2a0b419d3375b5ba65d30
+guid: 6a97bafc82911494b8c84daf7d413937
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: tree03
-    second: {fileID: 2100000, guid: e7be9e8abf421c14b83ff9cd646b2f63, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +35,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1

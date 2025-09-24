@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1b6d7cf6a4c33914baf15b4d263c4105
+guid: 268d21b883abcd94bbf56b5d7942bf3c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: 2d99cdb1de5fb904bbb90f17c84dcb85, type: 2}
+      name: StreetSignMaterial
+    second: {fileID: 2100000, guid: ca74fcc347cf2c549b39271f7cdd179d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,7 +38,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.6
+    globalScale: 1
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
@@ -93,7 +93,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.006
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

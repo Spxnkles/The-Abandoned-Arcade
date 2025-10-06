@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1bd1f345046b50c4eb49f7e2fc3ba0f3
+guid: 5c3a67177cc332b438509b2b470eb51a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,38 +7,43 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cold
-    second: {fileID: 2100000, guid: 150158c9f6180354babad2fe772ca605, type: 2}
+      name: Carpet
+    second: {fileID: 2100000, guid: eb2ac959571ce724891428e7589f4d77, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Counter
-    second: {fileID: 2100000, guid: 09114da4df5eaeb449dce66eb68549c7, type: 2}
+      name: Ceiling
+    second: {fileID: 2100000, guid: fc3f2ed0af266864c9dcc463385cff63, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Counter_Top
-    second: {fileID: 2100000, guid: c7beb803c81c46b4e8d16e44584db1f7, type: 2}
+      name: Door_Frame
+    second: {fileID: 2100000, guid: 49e7e9cfea9ad434690f0e7205eb55a8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Drain
-    second: {fileID: 2100000, guid: 932380d23c900a44bb17e295c8667e9e, type: 2}
+      name: Floor
+    second: {fileID: 2100000, guid: eb2ac959571ce724891428e7589f4d77, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Handles
-    second: {fileID: 2100000, guid: eba6806fe74cf8748b0e8557e639a3e1, type: 2}
+      name: Maintenance
+    second: {fileID: 2100000, guid: b9edddfe0a6272d4bbe080a0e77d4b23, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Hot
-    second: {fileID: 2100000, guid: 8cc9beddbf53bc243a883c2d3e69b58e, type: 2}
+      name: Tiles
+    second: {fileID: 2100000, guid: 02eba2b90a3d9c7489452375911c4c61, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Tap
-    second: {fileID: 2100000, guid: 77ef0d69124eb9449bad2a62683d4492, type: 2}
+      name: Walls
+    second: {fileID: 2100000, guid: b30d956229e4d0345962eb46dd3c15bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door
+    second: {fileID: 2100000, guid: f926697de0c683347a27b570b8bdd1fc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

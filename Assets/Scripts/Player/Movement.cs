@@ -23,8 +23,8 @@ public class Movement : MonoBehaviour
     [Header("Look settings")]
     public float lookSensitivity = 5f;
     public float lookAngle = 90f;
-    public float defaultHeight = 2f;
     [Header("Crouching")]
+    public float defaultHeight = 2f;
     public bool crouchingEnabled = true;
     public float crouchHeight = 1f;
     public float crouchSpeed = 3f;

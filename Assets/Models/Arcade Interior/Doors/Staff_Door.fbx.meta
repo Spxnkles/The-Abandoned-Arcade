@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1bd1f345046b50c4eb49f7e2fc3ba0f3
+guid: 946d3268c157bcc4990f85f72650f8be
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,38 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cold
-    second: {fileID: 2100000, guid: 150158c9f6180354babad2fe772ca605, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Counter
-    second: {fileID: 2100000, guid: 09114da4df5eaeb449dce66eb68549c7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Counter_Top
-    second: {fileID: 2100000, guid: c7beb803c81c46b4e8d16e44584db1f7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Drain
-    second: {fileID: 2100000, guid: 932380d23c900a44bb17e295c8667e9e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Handles
+      name: Handles.002
     second: {fileID: 2100000, guid: eba6806fe74cf8748b0e8557e639a3e1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Hot
-    second: {fileID: 2100000, guid: 8cc9beddbf53bc243a883c2d3e69b58e, type: 2}
+      name: Hole.001
+    second: {fileID: 2100000, guid: 932380d23c900a44bb17e295c8667e9e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Tap
-    second: {fileID: 2100000, guid: 77ef0d69124eb9449bad2a62683d4492, type: 2}
+      name: Staff_Door.001
+    second: {fileID: 2100000, guid: 03d1cd8927cb8394985d3add238dfc0a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Title.002
+    second: {fileID: 2100000, guid: e8e360a7041a84c4bafc058ea7605eb6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

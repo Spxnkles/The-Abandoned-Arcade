@@ -121,7 +121,6 @@ public class Movement : MonoBehaviour
         if (!bobEnabled) return;
 
         float speed = new Vector3(characterController.velocity.x, 0, characterController.velocity.z).magnitude;
-        Debug.Log(speed);
 
         if (speed < toggleSpeed || !characterController.isGrounded) return;
 

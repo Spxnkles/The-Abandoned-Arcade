@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5378536455280782058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7813287012686159398}
+  - component: {fileID: 6785351799633207319}
+  - component: {fileID: 8302410011616497733}
+  - component: {fileID: 8063506012741842764}
+  m_Layer: 0
+  m_Name: StoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7813287012686159398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378536455280782058}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6785351799633207319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378536455280782058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42002e050e7aea74c93d370699a36808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StoryManager
+  objectiveStage: 0
+  objectives: []
+--- !u!114 &8302410011616497733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378536455280782058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f7be013bbb08646a44dda568a8bce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectiveManager
+  title: {fileID: 0}
+  tasks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &8063506012741842764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378536455280782058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afe56bf5ea461a4fbad7dfa3270eb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  icon: {fileID: 0}
+  title: {fileID: 0}
+  speech: {fileID: 0}
+  typingAudio:
+  - {fileID: 8300000, guid: 825eda195b682304da38ed6d7faca534, type: 3}
+  - {fileID: 8300000, guid: c0da457c9e4072441bc3e085089f2009, type: 3}
+  - {fileID: 8300000, guid: 798807ae1bae7f34fa28b504c6d9fa7a, type: 3}
+  - {fileID: 8300000, guid: b1edf40bb58607845854d41f81d1da8a, type: 3}
+  - {fileID: 8300000, guid: 181fb69df815ec748bf294d34ef6e033, type: 3}
+  - {fileID: 8300000, guid: 2a102d65f6d6b1c45a00061ae99a4821, type: 3}
+  - {fileID: 8300000, guid: 767610cf9bd6d224ebf838e6005e94d4, type: 3}
+  - {fileID: 8300000, guid: c56ed526bdb596a4f81d0e7af3e89b30, type: 3}
+  - {fileID: 8300000, guid: a68845df47a7b2b48bf8aa9be0b88f7b, type: 3}

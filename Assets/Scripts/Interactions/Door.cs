@@ -17,11 +17,22 @@ public class Door : MonoBehaviour, IInteractable
     public string closePrompt = "Press E to Close Door";
     public string lockedPrompt = "Door is Locked";
 
+    [Header("Story")]
+    public bool completeTask = false;
+    public string taskID;
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip openAudio;
     public AudioClip closeAudio;
     public AudioClip lockedAudio;
+
+    [Header("Story Based Toggle")]
+    public bool storyBasedInteraction = false;
+    public enum StoryState { Before, During, After };
+    public StoryState storyState = StoryState.Before;
+    public bool allowInteraction = true;
+    public int stageID = -1;
 
 
     private bool isOpen = false;
@@ -55,6 +66,27 @@ public class Door : MonoBehaviour, IInteractable
             cooldown -= Time.deltaTime;
             if (cooldown <= 0f) canInteract = true;
         }
+
+        if (storyBasedInteraction)
+        {
+            switch (storyState)
+            {
+                case StoryState.Before:
+                    if (StoryManager.Instance.objectiveStage < stageID) canInteract = allowInteraction;
+                    else canInteract = !allowInteraction;
+                    break;
+
+                case StoryState.During:
+                    if (StoryManager.Instance.objectiveStage == stageID) canInteract = allowInteraction;
+                    else canInteract = !allowInteraction;
+                    break;
+
+                case StoryState.After:
+                    if (StoryManager.Instance.objectiveStage > stageID) canInteract = allowInteraction;
+                    else canInteract = !allowInteraction;
+                    break;
+            }
+        }
     }
 
     public void Interact()
@@ -73,6 +105,16 @@ public class Door : MonoBehaviour, IInteractable
 
         cooldown = interactCooldown;
         canInteract = false;
+        AdvanceStory();
+    }
+
+    public void AdvanceStory()
+    {
+        if (completeTask)
+        {
+            completeTask = false;
+            StoryManager.Instance.advanceTask(taskID);
+        }
     }
 
     public string GetPrompt()

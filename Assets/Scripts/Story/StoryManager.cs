@@ -12,7 +12,7 @@ public class StoryManager : MonoBehaviour
     public static StoryManager Instance;
 
     [Header("Story")]
-    public int objectiveStage = 0;
+    public int objectiveStage = -1;
     public List<Objective> objectives;
     public Objective activeObj => objectives[objectiveStage];
 
@@ -22,7 +22,9 @@ public class StoryManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        StartCoroutine(IntroSequence());
+        CreateObjectives();
+
+        StartCoroutine(Storyline());
     }
 
     public void advanceTask(string taskID)
@@ -34,8 +36,6 @@ public class StoryManager : MonoBehaviour
         }
         task.complete = true;
         ObjectiveManager.Instance.completeTask(task.text);
-
-        if (checkTaskCompletion()) advanceObjective();
     }
 
     public void advanceObjective()
@@ -62,20 +62,67 @@ public class StoryManager : MonoBehaviour
 
     #endregion
 
-    #region STORY SEQUENCES
+    #region OBJECTIVES
+
+    private void CreateObjectives()
+    {
+        objectives.Add(new Objective
+        {
+            stageID = 0,
+            title = "Have some food",
+            tasks = new Task[]
+            {
+                new Task {id = "fridge", text = "Open the fridge"},
+                new Task {id = "food", text = "Pick up the leftovers"},
+                new Task {id = "heat", text = "Heat up the leftovers"}
+            }
+        });
+    }
+
+    #endregion
+
+
+    #region STORYLINE
+    // THE STORYLINE CONTROLS THE FLOW OF THE STORY AND ORDER OF SEQUENCES 
+    private IEnumerator Storyline()
+    {
+        // 5 Second delay for player to prepare
+        yield return new WaitForSeconds(1f);
+
+        // Intro monologue, food objective
+        yield return IntroSequence();
+
+        // Wait 30 seconds while the food is heating up
+        yield return new WaitForSeconds(30f);
+
+        // Phone starts ringing
+        Debug.Log("RING RING RING NIGGA");
+    }
+
+    #endregion
+
+    #region STORY SEQUENCES & DIALOGUES/MONOLOGUES
 
     // START OF GAME - PLAYER ARRIVED HOME
     private IEnumerator IntroSequence()
     {
-        // Wait 5 seconds
-        yield return new WaitForSeconds(5f);
-        // After 5 seconds play the monologue, player has arrived home.
+        // Play the monologue, player has arrived home, hungry
         yield return PlayIntroMonologue();
+
+        // Advance objective, starts the obhjective
+        advanceObjective();
+
+        // Await till the objective has been completed
+        yield return new WaitUntil(() => checkTaskCompletion());
+
+        // Start microwave sound
+        GameObject.Find("Microwave").GetComponent<ObjectAudio>().PlaySound();
     }
 
     // Player intro monologue
     IEnumerator PlayIntroMonologue()
     {
+
         Speech introMono = new Speech()
         {
             title = "You",
@@ -88,6 +135,9 @@ public class StoryManager : MonoBehaviour
         yield return DialogueManager.Instance.PlayDialogue(mono);
     }
 
+
+    //
+
     #endregion
 }
 
@@ -98,7 +148,7 @@ public class Task
 {
     public string id;
     public string text;
-    public bool complete;
+    public bool complete = false;
 }
 
 [System.Serializable]
@@ -106,7 +156,7 @@ public class Objective
 {
     public int stageID;
     public string title;
-    public List<Task> tasks;
+    public Task[] tasks;
 }
 
 #endregion

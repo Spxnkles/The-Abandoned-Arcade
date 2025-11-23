@@ -9,12 +9,16 @@ public class ObjectiveManager : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI title;
     public TextMeshProUGUI[] tasks;
+    public AudioSource audioSource;
+    public AudioClip objAudio;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        hideObjective();
     }
 
     // Update is called once per frame
@@ -30,6 +34,7 @@ public class ObjectiveManager : MonoBehaviour
         title.text = objective_title;
 
         int i = 0;
+
         foreach (Task ot in objective_tasks)
         {
             tasks[i].enabled = true;
@@ -39,6 +44,7 @@ public class ObjectiveManager : MonoBehaviour
             i++;
         }
 
+        updateObjectiveAudio();
     }
 
     void hideObjective()
@@ -52,6 +58,11 @@ public class ObjectiveManager : MonoBehaviour
             resetTask(task);
             task.enabled = false;
         }
+    }
+
+    void updateObjectiveAudio()
+    {
+        audioSource.PlayOneShot(objAudio);
     }
 
     // Function to complete task + overload with TMP variable + overload to complete task with taskText

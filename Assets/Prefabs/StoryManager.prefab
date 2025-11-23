@@ -67,6 +67,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  audioSource: {fileID: 0}
+  objAudio: {fileID: 8300000, guid: 8d0ae0350f46221409c00daef0b865a7, type: 3}
 --- !u!114 &8063506012741842764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +84,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   title: {fileID: 0}
   speech: {fileID: 0}
+  audioSource: {fileID: 0}
   typingAudio:
   - {fileID: 8300000, guid: 825eda195b682304da38ed6d7faca534, type: 3}
   - {fileID: 8300000, guid: c0da457c9e4072441bc3e085089f2009, type: 3}

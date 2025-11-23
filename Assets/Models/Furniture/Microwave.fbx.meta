@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c9f9273ffe30fe408f3c33c6652a918
+guid: 006d4cd0a5bfa894f8af92599c9bd48a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: defaultMat
+      name: Microwave
+    second: {fileID: -3748621807466058688, guid: cdc47bbb745845b41b692187feddd94d, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Microwave_Buttons
+    second: {fileID: 2100000, guid: 8edfd9c6c76db5248bb8a6e597bf3a8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Microwave_Glass
+    second: {fileID: 2100000, guid: aca4aaa7434cf214abb3a95fab341865, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Microwave_Plate
     second: {fileID: 2100000, guid: 1da7195bb73bad14094565648dfa5c8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Microwave_Screen
+    second: {fileID: 3589333493158463532, guid: 215c56da4bbfa0b4aad2bd10042d9d1e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +60,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1

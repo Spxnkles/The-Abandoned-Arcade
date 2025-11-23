@@ -11,6 +11,8 @@ public class InventorySlot
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory Instance;
+
     public InventorySlot[] slots = new InventorySlot[3];
     public Transform equip;
 
@@ -20,6 +22,12 @@ public class Inventory : MonoBehaviour
     // Private variables
     public int currentSlot = -1;
     private GameObject currentItemObject;
+
+    private void Start()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     void Update()
     {
@@ -37,7 +45,7 @@ public class Inventory : MonoBehaviour
             if (slot == currentSlot)
             {
                 currentSlot = -1;
-                updateSelectorUI();
+                UpdateSelectorUI();
                 return;
             }
             else currentSlot = slot;
@@ -47,7 +55,7 @@ public class Inventory : MonoBehaviour
         {
             currentItemObject = Instantiate(slots[slot].itemPrefab, equip);
         }
-        updateSelectorUI();
+        UpdateSelectorUI();
     }
 
     public bool AddItem(string newItemName, GameObject newItemPrefab, Texture2D newItemIcon)
@@ -69,7 +77,36 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public void updateSelectorUI()
+    public GameObject GetGameObject()
+    {
+        if (currentSlot != -1)
+        {
+            return currentItemObject;
+        }
+        else return null;
+    }
+
+    public string CheckEquippedItem()
+    {
+        if (currentSlot == -1) return null;
+
+        return slots[currentSlot].itemName;
+    }
+
+    public void RemoveItem(string itemName)
+    {
+        if (slots[currentSlot].itemName == itemName)
+        {
+            slots[currentSlot].itemName = null;
+            slots[currentSlot].itemPrefab = null;
+            slots[currentSlot].slotIcon.transform.GetComponentInChildren<RawImage>().texture = null;
+            slots[currentSlot].slotIcon.transform.GetComponentInChildren<RawImage>().enabled = false;
+
+            currentItemObject = null;
+        }
+    }
+
+    public void UpdateSelectorUI()
     {
         foreach (InventorySlot slot in slots)
         {

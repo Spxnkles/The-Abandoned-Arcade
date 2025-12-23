@@ -47,7 +47,7 @@ public class ObjectiveManager : MonoBehaviour
         updateObjectiveAudio();
     }
 
-    void hideObjective()
+    public void hideObjective()
     {
         // Hide title
         title.enabled = false;

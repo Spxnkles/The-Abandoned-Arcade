@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 67d46256e1aa5e146bf59311864de6cb
+guid: 513d56545cb973f4fad01455ebc3d7c9
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Metal
-    second: {fileID: -3748621807466058688, guid: cdc47bbb745845b41b692187feddd94d, type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wood
-    second: {fileID: 2100000, guid: 80576ff68ac1e4b43b6a54cde93a2745, type: 2}
+      name: PhoneMat
+    second: {fileID: 2100000, guid: 6c20479d6683e0741b9d6bf28fca2d67, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -43,7 +38,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.006
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
@@ -101,7 +96,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.006
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

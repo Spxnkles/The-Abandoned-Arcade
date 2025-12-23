@@ -11,6 +11,8 @@ public class StoryManager : MonoBehaviour
 
     public static StoryManager Instance;
 
+    public bool debugMode = false;
+
     [Header("Story")]
     public int objectiveStage = -1;
     public List<Objective> objectives;
@@ -77,6 +79,15 @@ public class StoryManager : MonoBehaviour
                 new Task {id = "heat", text = "Heat up the leftovers"}
             }
         });
+        objectives.Add(new Objective
+        {
+            stageID = 1,
+            title = "Pick up the phone",
+            tasks = new Task[]
+            {
+                new Task {id = "phone", text = "Pick up the phone"}
+            }
+        });
     }
 
     #endregion
@@ -86,17 +97,36 @@ public class StoryManager : MonoBehaviour
     // THE STORYLINE CONTROLS THE FLOW OF THE STORY AND ORDER OF SEQUENCES 
     private IEnumerator Storyline()
     {
+        // INTRO SEQUENCE START
+
         // 5 Second delay for player to prepare
-        yield return new WaitForSeconds(1f);
+        if (!debugMode) yield return new WaitForSeconds(5f);
+        // DEBUG MODE 1 SECOND
+        else yield return new WaitForSeconds(1f);
 
         // Intro monologue, food objective
         yield return IntroSequence();
 
+        ObjectiveManager.Instance.hideObjective();
+
         // Wait 30 seconds while the food is heating up
-        yield return new WaitForSeconds(30f);
+        if (!debugMode) yield return new WaitForSeconds(30f);
+        // DEBUG MODE 3 SECONDS
+        else yield return new WaitForSeconds(3f);
+
+        // INTRO SEQUENCE END
+
+
+
+        // PHONE SEQUENCE START
 
         // Phone starts ringing
-        Debug.Log("RING RING RING NIGGA");
+        yield return PhoneRing();
+
+        ObjectiveManager.Instance.hideObjective();
+
+        // Phone dialogue sequence
+        yield return PhoneSequence();
     }
 
     #endregion
@@ -104,7 +134,7 @@ public class StoryManager : MonoBehaviour
     #region STORY SEQUENCES & DIALOGUES/MONOLOGUES
 
     // START OF GAME - PLAYER ARRIVED HOME
-    private IEnumerator IntroSequence()
+    IEnumerator IntroSequence()
     {
         // Play the monologue, player has arrived home, hungry
         yield return PlayIntroMonologue();
@@ -132,11 +162,35 @@ public class StoryManager : MonoBehaviour
 
         Speech[] mono = new Speech[] { introMono };
 
-        yield return DialogueManager.Instance.PlayDialogue(mono);
+        // skip monologue in debug
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono);
     }
 
+    IEnumerator PhoneRing()
+    {
+        GameObject.Find("Telephone").GetComponent<ObjectAudio>().PlayLoop();
 
-    //
+        yield return new WaitForSeconds(3f);
+
+        advanceObjective();
+
+        yield return new WaitUntil(() => checkTaskCompletion());
+    }
+
+    IEnumerator PhoneSequence()
+    {
+        Speech introMono = new Speech()
+        {
+            title = "You",
+            color = Color.lightBlue,
+            speeches = new string[] { "Hello?", "Who's there?" }
+        };
+
+        Speech[] dialog = new Speech[] { introMono };
+
+        yield return DialogueManager.Instance.PlayDialogue(dialog);
+    }
+
 
     #endregion
 }

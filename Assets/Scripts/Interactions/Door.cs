@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class Door : MonoBehaviour, IInteractable
     public float openAngle = 90f;
     public float openingSpeed = 2.5f;
     public float interactCooldown = 2f;
+    public bool openUpwards = false;
 
     [Header("Locking")]
     public bool isLocked = false;
@@ -46,7 +48,9 @@ public class Door : MonoBehaviour, IInteractable
     void Start()
     {
         closedRotation = transform.rotation;
-        openRotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, openAngle, 0));
+        
+        if (!openUpwards) openRotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, openAngle, 0));
+        else openRotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(openAngle, 0, 0));
     }
 
     // Update is called once per frame
@@ -86,6 +90,10 @@ public class Door : MonoBehaviour, IInteractable
                     else canInteract = !allowInteraction;
                     break;
             }
+        }
+
+        if (isLocked) {
+            if (Inventory.Instance.keys.Contains(key)) isLocked = false;
         }
     }
 

@@ -10,6 +10,7 @@ public class PlayerInteract : MonoBehaviour
     public LayerMask interactLayer;
 
     public TextMeshProUGUI promptUI;
+    public GameObject playerCamera;
 
 
 
@@ -20,7 +21,7 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactLayer))

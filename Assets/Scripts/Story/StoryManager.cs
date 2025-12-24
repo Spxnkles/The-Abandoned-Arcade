@@ -18,6 +18,14 @@ public class StoryManager : MonoBehaviour
     public List<Objective> objectives;
     public Objective activeObj => objectives[objectiveStage];
 
+
+
+    // CHARACTER CONFIGURATION
+        // You, the main character
+    Character mainCharacter = new Character() { name = "You", speechColor = Color.lightBlue };
+        // Friend Michael
+    Character michael = new Character() { name = "Michael", speechColor = Color.softRed };
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -88,6 +96,18 @@ public class StoryManager : MonoBehaviour
                 new Task {id = "phone", text = "Pick up the phone"}
             }
         });
+        objectives.Add(new Objective
+        {
+            stageID = 2,
+            title = "Prepare to explore",
+            tasks = new Task[]
+            {
+                new Task {id = "trunk", text = "Open car trunk"},
+                new Task {id = "flashlight", text = "Pack flashlight"},
+                new Task {id = "crowbar", text = "Pack crowbar"},
+                new Task {id = "axe", text = "Pack axe"}
+            }
+        });
     }
 
     #endregion
@@ -127,6 +147,14 @@ public class StoryManager : MonoBehaviour
 
         // Phone dialogue sequence
         yield return PhoneSequence();
+
+        // PHONE SEQUENCE END
+
+
+
+        // PREPERATION SEQUENCE START
+        Debug.Log("prep seq");
+        yield return new WaitUntil(() => checkTaskCompletion());
     }
 
     #endregion
@@ -155,8 +183,8 @@ public class StoryManager : MonoBehaviour
 
         Speech introMono = new Speech()
         {
-            title = "You",
-            color = Color.lightBlue,
+            title = mainCharacter.name,
+            color = mainCharacter.speechColor,
             speeches = new string[] { "Finaly home...", "Today was such a loooong day.", "Man, I hate work, it's so boring.", "Well, at least I make a decent living.", "I am sooo hungry, I think there are some leftovers in the fridge.", "I should heat them up." }
         };
 
@@ -175,20 +203,73 @@ public class StoryManager : MonoBehaviour
         advanceObjective();
 
         yield return new WaitUntil(() => checkTaskCompletion());
+
+        GameObject.Find("Telephone").GetComponent<ObjectAudio>().StopSound();
     }
 
     IEnumerator PhoneSequence()
     {
-        Speech introMono = new Speech()
+        Speech[] dialog = new Speech[]
         {
-            title = "You",
-            color = Color.lightBlue,
-            speeches = new string[] { "Hello?", "Who's there?" }
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "Hello?", "Who's there?" }},
+            new Speech() {title = "???", color = michael.speechColor, speeches = new string[] { "Hey there...", "We haven't spoken in a long time." }},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "Excuse me?", "Who is this?" }},
+            new Speech() {title = "???", color = michael.speechColor, speeches = new string[] { "It's Michael! Don't you remember my voice?" }},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "No, I don't recognise it.", "Are you Michael from high school?" }},
+            new Speech() {title = michael.name, color = michael.speechColor, speeches = new string[] { "Of course...", "How many Michaels do you know?" }},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "Well actually-" }},
+            new Speech() {title = michael.name, color = michael.speechColor, speeches = new string[] { "Whatever.", "Anyways...", "So you might be wondering why I'm calling you in these late hours." }},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "Yes I am. I'm starving and you're wasting my time." }},
+            new Speech() {title = michael.name, color = michael.speechColor, speeches = new string[] { "Okay, well, hear me out...", "Do you remember the times during high school how we used to go exploring abandoned buildings around town?" }},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "Yeah, I remember.", "That time we got attacked by a drunk hobo in that old post office... That wasn't very fun." }},
+            new Speech() {title = michael.name, color = michael.speechColor, speeches = new string[] { "I know... It wasn't the safest activity we could have done...", "But hear me out-" }},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "Don't tell me you want to do something stupid again..." }},
+            new Speech() {title = michael.name, color = michael.speechColor, speeches = new string[] { "Listen... this might sound crazy... but...", "There's this arcade on the edge of town by the forest...", "You remember it? We used to spend a ton of time there!"}},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "Yes... We also spent a fortune there. My parents didn't really like that." }},
+            new Speech() {title = michael.name, color = michael.speechColor, speeches = new string[] { "Look, that doesn't matter right now.", "The thing is, the arcade has been closed since the 90's...", "I went around the arcade recently and it looks in pretty good shape.", "The door had a chain on it, so I assume the interior could be intact.", "Imagine how cool it would be to explore the place and see all the games we used to play!", "Some of them might still work... I wonder if my Rocketron record still prevails..."}},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "I don't know if this is a good idea.", "It sounds cool, but if the place is locked up, don't you think there might be a security guard? Or cameras?" }},
+            new Speech() {title = michael.name, color = michael.speechColor, speeches = new string[] { "Maybe. But we can outrun the guard. And I don't think there were cameras back when we used to go there.", "And remembering the rumours about financial issues the arcade had towards it's end, I doubt they had the cash to setup cameras.", "Let's hope there won't be any killer robots, like there were at that one pizza place we heard of."}},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "Don't even remind me of that." }},
+            new Speech() {title = michael.name, color = michael.speechColor, speeches = new string[] { "Okay, you're wasting time now. Either you're coming with, or I'm going alone."}},
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "I need to think this through..." }},
+            new Speech() {title = michael.name, color = michael.speechColor, speeches = new string[] { "I'm gonna grab some stuff and head over there soon.", "You remember the spot? Don't be late or I'm going in without you.", "Don't let me down man... Please..." }},
         };
 
-        Speech[] dialog = new Speech[] { introMono };
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(dialog);
 
-        yield return DialogueManager.Instance.PlayDialogue(dialog);
+        GameObject.Find("TelEnd").GetComponent<ObjectAudio>().PlaySound();
+
+        Speech[] mono1 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "Wait! Hello?",
+                "Could have at least said bye."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono1);
+
+        GameObject.Find("TelEnd").GetComponent<ObjectAudio>().StopSound();
+        GameObject.Find("TelHang").GetComponent<ObjectAudio>().PlaySound();
+
+
+
+        Speech[] mono2 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "It's been so long since I've done something like this.",
+                "I kinda regreted doing it back then... I have a job now and don't really want to get into any trouble.",
+                "But on the other hand, my life has been very boring since then.",
+                "This isn't very legal, but I miss the adrenaline of exploring abandoned buildings.",
+                "A little bit of nostalgia won't hurt... and if Mike is already going, I might aswell tag along.",
+                "If anything goes south, I'll just leave him there...",
+                "I should throw some tools in the car before leaving."
+            }},
+        };
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono2);
+
+        advanceObjective();
     }
 
 
@@ -211,6 +292,14 @@ public class Objective
     public int stageID;
     public string title;
     public Task[] tasks;
+}
+
+[System.Serializable]
+public class Character
+{
+    public string name;
+    public Color speechColor;
+    public Texture2D icon;
 }
 
 #endregion

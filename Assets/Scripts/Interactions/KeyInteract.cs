@@ -1,8 +1,10 @@
+using System.Linq;
 using UnityEngine;
 
-public class ObjectInteract : MonoBehaviour, IInteractable
+public class KeyInteract : MonoBehaviour, IInteractable
 {
-    public string interactPrompt = "Press E to Interact";
+    public int key;
+    public string interactPrompt = "Press E to Pick Up";
 
     [Header("Story")]
     public bool completeTask = false;
@@ -53,8 +55,10 @@ public class ObjectInteract : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (!canInteract) return;
-
+        Inventory.Instance.keys.Add(key);
         AdvanceStory();
+
+        Destroy(gameObject);
     }
 
     public void AdvanceStory()

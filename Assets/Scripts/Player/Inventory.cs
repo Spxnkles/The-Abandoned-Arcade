@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,7 @@ public class Inventory : MonoBehaviour
     public static Inventory Instance;
 
     public InventorySlot[] slots = new InventorySlot[3];
+    public List<int> keys;
     public Transform equip;
 
     public Color slotColor = Color.black;

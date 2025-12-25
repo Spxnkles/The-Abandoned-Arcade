@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: da526c92dcb56f4458aea3bfbed6cab9
+guid: f933b493283edfe47bcb5d1bcf89bcfc
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Light
-    second: {fileID: 2100000, guid: 3289407e2033df14cac162afd9378cf3, type: 2}
+      name: Handle
+    second: {fileID: 2100000, guid: d0c5e933cf1930a4bb411f554f3b7a7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: -3748621807466058688, guid: cdc47bbb745845b41b692187feddd94d, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,7 +43,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.05
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
@@ -96,7 +101,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.05
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

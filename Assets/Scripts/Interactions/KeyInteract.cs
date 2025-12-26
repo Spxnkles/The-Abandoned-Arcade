@@ -6,6 +6,8 @@ public class KeyInteract : MonoBehaviour, IInteractable
     public int key;
     public string interactPrompt = "Press E to Pick Up";
 
+    public AudioSource keySound;
+
     [Header("Story")]
     public bool completeTask = false;
     public string taskID;
@@ -56,6 +58,9 @@ public class KeyInteract : MonoBehaviour, IInteractable
     {
         if (!canInteract) return;
         Inventory.Instance.keys.Add(key);
+
+        if (keySound != null) keySound.Play();
+
         AdvanceStory();
 
         Destroy(gameObject);

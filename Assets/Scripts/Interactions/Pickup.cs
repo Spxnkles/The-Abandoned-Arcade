@@ -9,6 +9,8 @@ public class Pickup : MonoBehaviour, IInteractable
 
     public string pickupPrompt = "Press E to Pick Up";
 
+    public AudioSource pickupSound;
+
     [Header("Story")]
     public bool completeTask = false;
     public string taskID;
@@ -65,6 +67,7 @@ public class Pickup : MonoBehaviour, IInteractable
             // Check if player had enough space and managed to pick up the item
             if (pickedUp)
             {
+                if (pickupSound != null) pickupSound.Play();
                 AdvanceStory();
                 Destroy(gameObject);
             }

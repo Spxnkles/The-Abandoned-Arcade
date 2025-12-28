@@ -1568,6 +1568,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   promptUI: {fileID: 6235182729972649}
+  playerCamera: {fileID: 1318743512082460810}
 --- !u!114 &139204268318020800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1590,6 +1591,7 @@ MonoBehaviour:
   - itemName: 
     itemPrefab: {fileID: 0}
     slotIcon: {fileID: 567167008479642704}
+  keys: 00000000
   equip: {fileID: 8457842735698736912}
   slotColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   selectedSlotColor: {r: 0.1, g: 0.1, b: 0.1, a: 0.5019608}

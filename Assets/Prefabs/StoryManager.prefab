@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42002e050e7aea74c93d370699a36808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoryManager
-  objectiveStage: 0
+  debugMode: 1
+  objectiveStage: -1
   objectives: []
 --- !u!114 &8302410011616497733
 MonoBehaviour:

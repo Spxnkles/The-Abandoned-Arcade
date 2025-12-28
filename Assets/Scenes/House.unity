@@ -988,7 +988,7 @@ MonoBehaviour:
   openPrompt: Press E to Open Trunk
   closePrompt: Press E to Close Trunk
   lockedPrompt: The car is locked
-  completeTask: 1
+  completeTask: 0
   taskID: trunk
   audioSource: {fileID: 0}
   openAudio: {fileID: 0}
@@ -1208,13 +1208,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228326024}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.027351655, y: -0.8561404, z: -0.045557722, w: -0.5140041}
-  m_LocalPosition: {x: 0.77, y: -0.4711, z: 0.051}
+  m_LocalRotation: {x: 0.50906956, y: -0.84208745, z: -0.17325652, w: 0.04146116}
+  m_LocalPosition: {x: 0.815, y: -0.461, z: -0.053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 330428956}
-  m_LocalEulerAnglesHint: {x: -6.092, y: -241.959, z: 0}
+  m_LocalEulerAnglesHint: {x: -14.453, y: -165.269, z: -64.187}
 --- !u!1001 &230479476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1881,9 +1881,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Place
   itemName: Flashlight
   placeSpot: {fileID: 228326024}
+  objectOverride: {fileID: 919132149155446097, guid: da526c92dcb56f4458aea3bfbed6cab9, type: 3}
   placePrompt: Press E to Place
-  completeTask: 0
-  taskID: 
+  completeTask: 1
+  taskID: flashlight
   storyBasedInteraction: 1
   storyState: 1
   allowPlacement: 1
@@ -1907,8 +1908,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5998574, y: 0.26577377, z: 1.1073672}
-  m_Center: {x: 0.64299214, y: -0.3671131, z: -0.46988165}
+  m_Size: {x: 0.7936561, y: 0.15876007, z: 0.91137886}
+  m_Center: {x: 0.4462536, y: -0.42061996, z: -0.5678726}
 --- !u!23 &330428954
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7402,10 +7403,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 549341770716013043, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 549341770716013043, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7453,10 +7450,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4232929076535490038, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4712993143883525566, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7464,10 +7457,6 @@ PrefabInstance:
     - target: {fileID: 4712993143883525566, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4712993143883525566, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 4712993143883525566, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -7484,10 +7473,6 @@ PrefabInstance:
     - target: {fileID: 5304678256112442912, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5304678256112442912, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 5304678256112442912, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -7526,10 +7511,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6557451717154381995, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557451717154381995, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7546,10 +7527,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6706131558329662878, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 6706131558329662878, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7564,10 +7541,6 @@ PrefabInstance:
     - target: {fileID: 6800935027162743038, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800935027162743038, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 6800935027162743038, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -7609,10 +7582,6 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1367220213}
-    - target: {fileID: 8699271535695883626, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
-      propertyPath: m_text
-      value: Reheat some food
-      objectReference: {fileID: 0}
     - target: {fileID: 9144694776673789035, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -11410,9 +11379,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Place
   itemName: Axe
   placeSpot: {fileID: 1975494102}
+  objectOverride: {fileID: 0}
   placePrompt: Press E to Place
-  completeTask: 0
-  taskID: 
+  completeTask: 1
+  taskID: axe
   storyBasedInteraction: 1
   storyState: 1
   allowPlacement: 1
@@ -11436,8 +11406,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2191454, y: 0.3288765, z: 0.5434163}
-  m_Center: {x: -0.6853514, y: -0.33556175, z: -0.22829185}
+  m_Size: {x: 1.0101584, y: 0.20234299, z: 0.83454704}
+  m_Center: {x: -0.58085823, y: -0.3988285, z: -0.08272679}
 --- !u!23 &1713549771
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11701,6 +11671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Place
   itemName: Spaghetti
   placeSpot: {fileID: 1138988433}
+  objectOverride: {fileID: 0}
   placePrompt: Press E to Place
   completeTask: 1
   taskID: heat
@@ -12769,10 +12740,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1823343916}
     - target: {fileID: 8302410011616497733, guid: 9fc2a5d83929bce418023030a1579146, type: 3}
-      propertyPath: objAudio
-      value: 
-      objectReference: {fileID: 8300000, guid: 8d0ae0350f46221409c00daef0b865a7, type: 3}
-    - target: {fileID: 8302410011616497733, guid: 9fc2a5d83929bce418023030a1579146, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1588479638}
@@ -13699,6 +13666,88 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cb2999b04fa0fd438db282ac04a744b, type: 3}
+--- !u!1 &2140148008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2140148012}
+  - component: {fileID: 2140148011}
+  - component: {fileID: 2140148010}
+  - component: {fileID: 2140148009}
+  m_Layer: 8
+  m_Name: Leave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2140148009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140148008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213235962d4522146a8e6650b786a1d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectInteract
+  interactPrompt: Press E to leave
+  completeTask: 1
+  taskID: leave
+  storyBasedInteraction: 1
+  storyState: 1
+  allowInteraction: 1
+  stageID: 3
+--- !u!65 &2140148010
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140148008}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.54146546, y: 1.9983978, z: 2.2374735}
+  m_Center: {x: -0.038972706, y: -0.4991989, z: 0.046116892}
+--- !u!33 &2140148011
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140148008}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &2140148012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140148008}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.07129868, z: -0, w: 0.99745506}
+  m_LocalPosition: {x: -209.148, y: 63.72, z: 665}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 8.177, z: 0}
 --- !u!1001 &2140870512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13930,6 +13979,7 @@ SceneRoots:
   - {fileID: 69160964}
   - {fileID: 68274067}
   - {fileID: 1198153623}
+  - {fileID: 2140148012}
   - {fileID: 1785179080}
   - {fileID: 462496567}
   - {fileID: 597698844}

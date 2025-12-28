@@ -4,6 +4,7 @@ public class Place : MonoBehaviour, IInteractable
 {
     public string itemName;
     public GameObject placeSpot;
+    public GameObject objectOverride;
     public string placePrompt = "Press E to Place";
 
     [Header("Story")]
@@ -35,7 +36,12 @@ public class Place : MonoBehaviour, IInteractable
         {
             GameObject itemObj = Inventory.Instance.GetGameObject();
 
-            itemObj.transform.SetParent(placeSpot.transform, false);
+            if (objectOverride == null) itemObj.transform.SetParent(placeSpot.transform, false);
+            else
+            {
+                Instantiate(objectOverride, placeSpot.transform);
+                Destroy(itemObj);
+            }
 
             Inventory.Instance.RemoveItem(itemName);
             canPlace = false;

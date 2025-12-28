@@ -3,12 +3,17 @@ using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class Movement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
     // Public configurable variables
 
     // Camera
     public Camera playerCamera;
+
+    // Freeze
+    public bool freeze = false;
+
     // Walk & Sprint
     [Header("Walk & Sprint")]
     public float walkSpeed = 5f;
@@ -51,6 +56,16 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        // Check single instance and destroy if exists already
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -60,6 +75,8 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        if (freeze) return;
+
         characterMovement();
         cameraMovement();
         headMovement();

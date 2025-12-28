@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6785351799633207319}
   - component: {fileID: 8302410011616497733}
   - component: {fileID: 8063506012741842764}
+  - component: {fileID: 3358933222457563784}
   m_Layer: 0
   m_Name: StoryManager
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   debugMode: 1
   objectiveStage: -1
   objectives: []
+  spawnPointID: 
 --- !u!114 &8302410011616497733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,3 +98,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 767610cf9bd6d224ebf838e6005e94d4, type: 3}
   - {fileID: 8300000, guid: c56ed526bdb596a4f81d0e7af3e89b30, type: 3}
   - {fileID: 8300000, guid: a68845df47a7b2b48bf8aa9be0b88f7b, type: 3}
+--- !u!114 &3358933222457563784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378536455280782058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edbe4edf2061ec45832aede08dab975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawner

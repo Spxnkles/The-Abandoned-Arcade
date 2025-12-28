@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class StoryManager : MonoBehaviour
 {
@@ -19,9 +21,13 @@ public class StoryManager : MonoBehaviour
     public Objective activeObj => objectives[objectiveStage];
 
 
+    public string spawnPointID;
+    public Animator transitionAnimator;
+
+
 
     // CHARACTER CONFIGURATION
-        // You, the main character
+    // You, the main character
     Character mainCharacter = new Character() { name = "You", speechColor = Color.lightBlue };
         // Friend Michael
     Character michael = new Character() { name = "Michael", speechColor = Color.softRed };
@@ -29,8 +35,15 @@ public class StoryManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        // Check single instance and destroy if exists already
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
 
         CreateObjectives();
 
@@ -68,6 +81,21 @@ public class StoryManager : MonoBehaviour
         }
 
         return tasksCompleted;
+    }
+
+    public IEnumerator TransitionLoadScene(string sceneName, string spawnID)
+    {
+        PlayerController.Instance.freeze = true;
+        transitionAnimator.SetBool("loading", true);
+
+        yield return new WaitForSeconds(1f);
+
+        spawnPointID = spawnID;
+        yield return SceneManager.LoadSceneAsync(sceneName);
+
+        PlayerController.Instance.freeze = false;
+        transitionAnimator.SetBool("loading", false);
+        yield return new WaitForSeconds(1f);
     }
 
     #endregion
@@ -139,6 +167,8 @@ public class StoryManager : MonoBehaviour
         if (!debugMode) yield return new WaitForSeconds(5f);
         // DEBUG MODE 1 SECOND
         else yield return new WaitForSeconds(1f);
+
+        yield return TransitionLoadScene("Testing", "test");
 
         // Intro monologue, food objective
         yield return IntroSequence();

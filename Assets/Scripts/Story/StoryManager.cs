@@ -219,7 +219,7 @@ public class StoryManager : MonoBehaviour
 
         GameObject.Find("Car_Leave").GetComponent<ObjectAudio>().PlaySound();
 
-        yield return new WaitForSeconds(15f);
+        if (!debugMode) yield return new WaitForSeconds(15f);
 
         /* ====================================================================
          *                      HOME SCENE OVER
@@ -242,6 +242,17 @@ public class StoryManager : MonoBehaviour
 
         transitionAnimator.SetBool("loading", false);
         yield return new WaitForSeconds(1f);
+
+        //yield return DriveSequence();
+
+        transitionAnimator.SetBool("loading", true);
+        yield return new WaitForSeconds(1f);
+        PlayerController.Instance.transform.SetParent(null);
+        DontDestroyOnLoad(PlayerController.Instance);
+
+        /* ====================================================================
+         *                      DRIVING SCENE OVER
+           ====================================================================*/
     }
 
     #endregion
@@ -359,6 +370,41 @@ public class StoryManager : MonoBehaviour
         if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono2);
 
         advanceObjective();
+    }
+
+    IEnumerator DriveSequence()
+    {
+        Speech[] mono = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "Why am I doing this?",
+                "Am I going to regret this?",
+                "Michael hasn’t changed.",
+                "Still impulsive. Still dragging me into stupid ideas.",
+                "Thought I'd never see him again... funny how one phone call can undo years of being responsible.",
+                "The arcade...",
+                "Haven’t thought about that place in ages.",
+                "That constant buzzing from the machines, the flashing neon lights... I'll never forget it.",
+                "It felt like a second home back then.",
+                "I miss the times when nothing mattered.",
+                "If the place is truly abandoned, why hasn't anyone stripped it yet?",
+                "Old machines, old wiring… someone would’ve taken it all by now.",
+                "Unless there’s a reason they didn’t.",
+                "I keep telling myself this is just nostalgia talking.",
+                "That this is no different from any of those buildings we explored back then.",
+                "Still… something feels off.",
+                "My hands are tighter on the steering wheel than they should be...",
+                "Whatever.",
+                "It’s probably just the stress of not doing this in so long.",
+                "Hopefully Michael’s already there. Waiting for me.",
+                "And yet…",
+                "I can’t quite overcome this feeling of...",
+                "Fear..."
+
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono);
     }
 
 

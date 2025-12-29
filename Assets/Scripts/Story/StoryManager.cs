@@ -161,6 +161,7 @@ public class StoryManager : MonoBehaviour
          */
 
 
+
         // INTRO SEQUENCE START
 
         // 5 Second delay for player to prepare
@@ -168,52 +169,64 @@ public class StoryManager : MonoBehaviour
         // DEBUG MODE 1 SECOND
         else yield return new WaitForSeconds(1f);
 
-        yield return TransitionLoadScene("Testing", "test");
+        if (!debugMode)
+        {
 
-        // Intro monologue, food objective
-        yield return IntroSequence();
+            // Intro monologue, food objective
+            yield return IntroSequence();
 
-        ObjectiveManager.Instance.hideObjective();
+            ObjectiveManager.Instance.hideObjective();
 
-        // Wait 30 seconds while the food is heating up
-        if (!debugMode) yield return new WaitForSeconds(30f);
-        // DEBUG MODE 3 SECONDS
-        else yield return new WaitForSeconds(3f);
+            // Wait 30 seconds while the food is heating up
+            if (!debugMode) yield return new WaitForSeconds(30f);
+            // DEBUG MODE 3 SECONDS
+            else yield return new WaitForSeconds(3f);
 
-        // INTRO SEQUENCE END
-
-
-
-        // PHONE SEQUENCE START
-
-        // Phone starts ringing
-        yield return PhoneRing();
-
-        ObjectiveManager.Instance.hideObjective();
-
-        // Phone dialogue sequence
-        yield return PhoneSequence();
-
-        // PHONE SEQUENCE END
+            // INTRO SEQUENCE END
 
 
 
-        // PREPERATION SEQUENCE STARTED
-        // WAITING FOR PLAYET TO PREPARE ALL ITEMS AND GET IN THE CAR AND LEAVE!
-        yield return new WaitUntil(() => checkTaskCompletion());
+            // PHONE SEQUENCE START
 
-        advanceObjective();
-        // Await for player to get in the car
+            // Phone starts ringing
+            yield return PhoneRing();
 
-        // SCREEN FADES OUT AND PLAYS AUDIO OF DOOR CLOSE AND CAR LEAVING
-        Debug.Log("Home scene outro play now");
+            ObjectiveManager.Instance.hideObjective();
+
+            // Phone dialogue sequence
+            yield return PhoneSequence();
+
+            // PHONE SEQUENCE END
+
+
+
+            // PREPERATION SEQUENCE STARTED
+            // WAITING FOR PLAYER TO PREPARE ALL ITEMS AND GET IN THE CAR AND LEAVE!
+            yield return new WaitUntil(() => checkTaskCompletion());
+
+            advanceObjective();
+            // Await for player to get in the car
+
+            yield return new WaitUntil(() => checkTaskCompletion());
+            ObjectiveManager.Instance.hideObjective();
+
+            // SCREEN FADES OUT AND PLAYS AUDIO OF DOOR CLOSE AND CAR LEAVING
+        }
+        PlayerController.Instance.freeze = true;
+
+        transitionAnimator.SetBool("loading", true);
+        yield return new WaitForSeconds(1f);
+
+        GameObject.Find("Car_Leave").GetComponent<ObjectAudio>().PlaySound();
+
+        yield return new WaitForSeconds(15f);
 
         /* ====================================================================
          *                      HOME SCENE OVER
            ====================================================================*/
 
-
-
+        spawnPointID = "car";
+        yield return SceneManager.LoadSceneAsync("Drive");
 
 
         /*
@@ -223,6 +236,12 @@ public class StoryManager : MonoBehaviour
          * ====================================================================
          * ====================================================================
          */
+
+        PlayerController.Instance.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        PlayerController.Instance.transform.SetParent(GameObject.Find("PlayerLock").transform, true);
+
+        transitionAnimator.SetBool("loading", false);
+        yield return new WaitForSeconds(1f);
     }
 
     #endregion

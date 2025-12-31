@@ -1303,7 +1303,7 @@ GameObject:
   - component: {fileID: 8457842735698736912}
   m_Layer: 0
   m_Name: Equip
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1534,6 +1534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 71214593131799358}
+  freeze: 0
   walkSpeed: 2.5
   sprintingEnabled: 1
   sprintSpeed: 5

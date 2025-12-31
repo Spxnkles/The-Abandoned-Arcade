@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 8d43d272bddcf3840999ac1689411f87
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Board
-    second: {fileID: 2100000, guid: eba6806fe74cf8748b0e8557e639a3e1, type: 2}
+    second: {fileID: -3748621807466058688, guid: cdc47bbb745845b41b692187feddd94d, type: 3}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -111,6 +111,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8

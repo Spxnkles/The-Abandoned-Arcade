@@ -28,9 +28,9 @@ public class StoryManager : MonoBehaviour
 
     // CHARACTER CONFIGURATION
     // You, the main character
-    Character mainCharacter = new Character() { name = "You", speechColor = Color.lightBlue };
+    public Character mainCharacter = new Character() { name = "You", speechColor = Color.lightBlue };
         // Friend Michael
-    Character michael = new Character() { name = "Michael", speechColor = Color.softRed };
+    public  Character michael = new Character() { name = "Michael", speechColor = Color.softRed };
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -143,6 +143,45 @@ public class StoryManager : MonoBehaviour
                 new Task {id = "leave", text = "Get in the car"}
             }
         });
+        objectives.Add(new Objective
+        {
+            stageID = 4,
+            title = "Inspect the area",
+            tasks = new Task[]
+            {
+                new Task {id = "arclook", text = "Look around the arcade"},
+                new Task {id = "carinspect", text = "Inspect the car"}
+            }
+        });
+        objectives.Add(new Objective
+        {
+            stageID = 5,
+            title = "Try to get in",
+            tasks = new Task[]
+            {
+                new Task {id = "inspdoor", text = "Inspect the front door"}
+            }
+        });
+        objectives.Add(new Objective
+        {
+            stageID = 6,
+            title = "Prepare to enter",
+            tasks = new Task[]
+            {
+                new Task {id = "getlight", text = "Grab flashlight"},
+                new Task {id = "getaxe", text = "Grab axe"}
+            }
+        });
+        objectives.Add(new Objective
+        {
+            stageID = 7,
+            title = "Enter the arcade",
+            tasks = new Task[]
+            {
+                new Task {id = "breakchain", text = "Break the chain"},
+                new Task {id = "enterarc", text = "Enter the arcade"}
+            }
+        });
     }
 
     #endregion
@@ -243,16 +282,38 @@ public class StoryManager : MonoBehaviour
         transitionAnimator.SetBool("loading", false);
         yield return new WaitForSeconds(1f);
 
-        //yield return DriveSequence();
+        if(!debugMode) yield return DriveSequence();
 
         transitionAnimator.SetBool("loading", true);
         yield return new WaitForSeconds(1f);
         PlayerController.Instance.transform.SetParent(null);
         DontDestroyOnLoad(PlayerController.Instance);
+        PlayerController.Instance.freeze = false;
 
         /* ====================================================================
-         *                      DRIVING SCENE OVER
+                                  DRIVING SCENE OVER
            ====================================================================*/
+
+        spawnPointID = "arcade_arrive";
+        yield return SceneManager.LoadSceneAsync("Arcade_Exterior");
+        // testing
+        if (debugMode) objectiveStage = 3;
+
+        /*
+         * ====================================================================
+         * ====================================================================
+         *                      ARCADE EXTERIOR SCENE
+         * ====================================================================
+         * ====================================================================
+         */
+
+        transitionAnimator.SetBool("loading", false);
+        yield return new WaitForSeconds(1f);
+        // Finished loading
+
+
+        yield return new WaitForSeconds(2f);
+        yield return ExteriorSequence();
     }
 
     #endregion
@@ -405,6 +466,57 @@ public class StoryManager : MonoBehaviour
             }},
         };
         yield return DialogueManager.Instance.PlayDialogue(mono);
+    }
+
+    IEnumerator ExteriorSequence()
+    {
+        Speech[] mono = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "That trip felt longer than it should have...",
+                "Where's Michael? I was expecting him to be here already.",
+                "I should look around a bit.",
+                "There's a car over there. Maybe he's waiting inside."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono);
+
+        advanceObjective();
+
+        yield return new WaitUntil(() => checkTaskCompletion());
+
+        Speech[] mono2 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "I'll try the door, maybe he's inside already."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono2);
+
+        advanceObjective();
+
+        yield return new WaitUntil(() => checkTaskCompletion());
+
+        Speech[] mono3 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "That's odd... the door is still chained up.",
+                "Michael was always a creative guy, he probably found a different way in.",
+                "Unless he wasn't here at all...",
+                "That's stupid. Of course he's inside already, probably trying to get the machines running.",
+                "I'll try bust through the door, maybe I'll scare him. Heh."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono3);
+
+        advanceObjective();
+
+        yield return new WaitUntil(() => checkTaskCompletion());
+
+        advanceObjective();
     }
 
 

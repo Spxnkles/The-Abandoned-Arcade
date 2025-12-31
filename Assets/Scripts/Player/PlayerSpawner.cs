@@ -26,7 +26,7 @@ public class PlayerSpawner : MonoBehaviour
                 Debug.Log("Found a spawn!");
                 PlayerController.Instance.transform.position = point.transform.position;
                 PlayerController.Instance.transform.rotation = point.transform.rotation;
-                playerCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
+                playerCamera.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 
             }
         }

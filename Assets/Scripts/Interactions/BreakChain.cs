@@ -54,16 +54,20 @@ public class BreakChain : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (!canInteract) return;
+        if ("Axe" == Inventory.Instance.CheckEquippedItem() && canInteract)
+        {
+            Destroy(Inventory.Instance.GetGameObject());
+            Inventory.Instance.RemoveItem("Axe");
 
-        PlayerController.Instance.freeze = true;
-        PlayerController.Instance.transform.position = position.transform.position;
-        PlayerController.Instance.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-        PlayerController.Instance.playerCamera.transform.localRotation = Quaternion.Euler(22f, 0f, 0f);
+            PlayerController.Instance.freeze = true;
+            PlayerController.Instance.transform.position = position.transform.position;
+            PlayerController.Instance.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+            PlayerController.Instance.playerCamera.transform.localRotation = Quaternion.Euler(22f, 0f, 0f);
 
-        canInteract = false;
+            canInteract = false;
 
-        StartCoroutine(Animation());
+            StartCoroutine(Animation());
+        }
     }
 
     IEnumerator Animation()
@@ -72,7 +76,6 @@ public class BreakChain : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(4f);
 
-        PlayerController.Instance.freeze = false;
         AdvanceStory();
     }
 
@@ -87,7 +90,7 @@ public class BreakChain : MonoBehaviour, IInteractable
 
     public string GetPrompt()
     {
-        if (!canInteract) return "";
-        return interactPrompt;
+        if ("Axe" == Inventory.Instance.CheckEquippedItem() && canInteract) return interactPrompt;
+        return "";
     }
 }

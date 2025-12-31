@@ -178,8 +178,16 @@ public class StoryManager : MonoBehaviour
             title = "Enter the arcade",
             tasks = new Task[]
             {
-                new Task {id = "breakchain", text = "Break the chain"},
-                new Task {id = "enterarc", text = "Enter the arcade"}
+                new Task {id = "breakchain", text = "Break the chain"}
+            }
+        });
+        objectives.Add(new Objective
+        {
+            stageID = 8,
+            title = "Welcome to the Arcade",
+            tasks = new Task[]
+            {
+                new Task {id = "arc", text = "Hi"}
             }
         });
     }
@@ -288,7 +296,6 @@ public class StoryManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         PlayerController.Instance.transform.SetParent(null);
         DontDestroyOnLoad(PlayerController.Instance);
-        PlayerController.Instance.freeze = false;
 
         /* ====================================================================
                                   DRIVING SCENE OVER
@@ -298,6 +305,8 @@ public class StoryManager : MonoBehaviour
         yield return SceneManager.LoadSceneAsync("Arcade_Exterior");
         // testing
         if (debugMode) objectiveStage = 3;
+        
+        PlayerController.Instance.freeze = false;
 
         /*
          * ====================================================================
@@ -314,6 +323,35 @@ public class StoryManager : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         yield return ExteriorSequence();
+
+        ObjectiveManager.Instance.hideObjective();
+
+        transitionAnimator.SetBool("loading", true);
+        yield return new WaitForSeconds(1f);
+
+        /* ====================================================================
+                                  ARCADE EXTERIOR SCENE OVER
+           ====================================================================*/
+
+        spawnPointID = "arcade";
+        yield return SceneManager.LoadSceneAsync("Arcade_Interior");
+
+        PlayerController.Instance.freeze = false;
+
+        /*
+         * ====================================================================
+         * ====================================================================
+         *                      ARCADE EXTERIOR SCENE
+         * ====================================================================
+         * ====================================================================
+         */
+
+        transitionAnimator.SetBool("loading", false);
+        yield return new WaitForSeconds(1f);
+        // Finished loading
+
+        advanceObjective();
+
     }
 
     #endregion
@@ -480,11 +518,11 @@ public class StoryManager : MonoBehaviour
                 "There's a car over there. Maybe he's waiting inside."
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono);
 
         advanceObjective();
 
-        yield return new WaitUntil(() => checkTaskCompletion());
+        if (!debugMode) yield return new WaitUntil(() => checkTaskCompletion());
 
         Speech[] mono2 = new Speech[]
         {
@@ -493,7 +531,7 @@ public class StoryManager : MonoBehaviour
                 "I'll try the door, maybe he's inside already."
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono2);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono2);
 
         advanceObjective();
 
@@ -510,13 +548,15 @@ public class StoryManager : MonoBehaviour
                 "I'll try bust through the door, maybe I'll scare him. Heh."
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono3);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono3);
 
         advanceObjective();
 
         yield return new WaitUntil(() => checkTaskCompletion());
 
         advanceObjective();
+
+        yield return new WaitUntil(() => checkTaskCompletion());
     }
 
 

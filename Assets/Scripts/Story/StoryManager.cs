@@ -210,6 +210,24 @@ public class StoryManager : MonoBehaviour
                 new Task {id = "MRgetin", text = "Find a way in"}
             }
         });
+        objectives.Add(new Objective
+        {
+            stageID = 9,
+            title = "Staff Room",
+            tasks = new Task[]
+            {
+                new Task {id = "staffInspect", text = "Inspect the room"}
+            }
+        });
+        objectives.Add(new Objective
+        {
+            stageID = 9,
+            title = "Staff Room",
+            tasks = new Task[]
+            {
+                new Task {id = "staffInspect", text = "Inspect the room"}
+            }
+        });
     }
 
     #endregion
@@ -609,6 +627,12 @@ public class StoryManager : MonoBehaviour
         );
 
         yield return new WaitForSeconds(2f);
+
+        advanceObjective();
+
+        yield return new WaitUntil(() => HasFlag(StoryFlag.enterStaff));
+
+
 
         advanceObjective();
     }

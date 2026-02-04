@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class ExplorationTrigger : MonoBehaviour
 {
+    [Header("Flags")]
+    public bool addFlag = false;
+    public StoryFlag flag;
+
     [Header("Story")]
     public bool completeTask = false;
     public string taskID;
@@ -52,15 +56,20 @@ public class ExplorationTrigger : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         wasTrigerred = true;
-        AdvanceStory();
+        Advance();
     }
 
-    public void AdvanceStory()
+    public void Advance()
     {
         if (completeTask)
         {
             completeTask = false;
             StoryManager.Instance.advanceTask(taskID);
+        }
+
+        if (addFlag)
+        {
+            StoryManager.Instance.AddFlag(flag);
         }
     }
 }

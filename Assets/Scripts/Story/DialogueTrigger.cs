@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.AppUI.UI;
 using UnityEngine;
 
@@ -6,9 +8,16 @@ public class DialogueTrigger : MonoBehaviour
 {
     public string[] lines;
 
+    [Header("Flags")]
+    public bool addFlag = false;
+    public StoryFlag flag;
+
     [Header("Story")]
     public bool completeTask = false;
     public string taskID;
+
+    [Header("Required Flags")]
+    public List<StoryFlag> requiredFlags = new List<StoryFlag> { };
 
     [Header("Story Based Toggle")]
     public bool storyBasedInteraction = false;
@@ -25,6 +34,15 @@ public class DialogueTrigger : MonoBehaviour
     void Update()
     {
         if (wasTrigerred) return;
+
+        foreach (StoryFlag flag in requiredFlags)
+        {
+            if (!StoryManager.Instance.HasFlag(flag))
+            {
+                canTrigger = false;
+                return;
+            }
+        }
 
         if (storyBasedInteraction)
         {
@@ -71,15 +89,20 @@ public class DialogueTrigger : MonoBehaviour
         Speech[] mono = new Speech[] { speech };
 
         yield return DialogueManager.Instance.PlayDialogue(mono);
-        AdvanceStory();
+        Advance();
     }
 
-    public void AdvanceStory()
+    public void Advance()
     {
         if (completeTask)
         {
             completeTask = false;
             StoryManager.Instance.advanceTask(taskID);
+        }
+
+        if (addFlag)
+        {
+            StoryManager.Instance.AddFlag(flag);
         }
     }
 }

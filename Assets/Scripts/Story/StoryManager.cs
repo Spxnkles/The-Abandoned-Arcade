@@ -24,6 +24,9 @@ public class StoryManager : MonoBehaviour
     public string spawnPointID;
     public Animator transitionAnimator;
 
+    private HashSet<StoryFlag> activeFlags = new HashSet<StoryFlag>();
+    
+
 
 
     // CHARACTER CONFIGURATION
@@ -81,6 +84,17 @@ public class StoryManager : MonoBehaviour
         }
 
         return tasksCompleted;
+    }
+
+    public bool HasFlag(StoryFlag flag)
+    {
+        return activeFlags.Contains(flag);
+    }
+
+    public void AddFlag(StoryFlag flag)
+    {
+        if (activeFlags.Add(flag))
+            Debug.Log($"Added flag {flag}");
     }
 
     public IEnumerator TransitionLoadScene(string sceneName, string spawnID)
@@ -184,10 +198,16 @@ public class StoryManager : MonoBehaviour
         objectives.Add(new Objective
         {
             stageID = 8,
-            title = "Welcome to the Arcade",
+            title = "Explore the arcade",
+            tasks = new Task[] {}
+        });
+        objectives.Add(new Objective
+        {
+            stageID = 9,
+            title = "Mysterious Room",
             tasks = new Task[]
             {
-                new Task {id = "arc", text = "Hi"}
+                new Task {id = "MRgetin", text = "Find a way in"}
             }
         });
     }
@@ -322,7 +342,7 @@ public class StoryManager : MonoBehaviour
 
 
         yield return new WaitForSeconds(2f);
-        yield return ExteriorSequence();
+        if (!debugMode) yield return ExteriorSequence();
 
         ObjectiveManager.Instance.hideObjective();
 
@@ -341,7 +361,7 @@ public class StoryManager : MonoBehaviour
         /*
          * ====================================================================
          * ====================================================================
-         *                      ARCADE EXTERIOR SCENE
+         *                      ARCADE INTERIOR SCENE
          * ====================================================================
          * ====================================================================
          */
@@ -350,7 +370,10 @@ public class StoryManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         // Finished loading
 
-        advanceObjective();
+        objectiveStage = 7;
+
+        yield return InteriorSequence();
+
 
     }
 
@@ -557,6 +580,37 @@ public class StoryManager : MonoBehaviour
         advanceObjective();
 
         yield return new WaitUntil(() => checkTaskCompletion());
+    }
+
+
+    // Interior sequence
+    IEnumerator InteriorSequence()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Speech[] mono = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "Wow, I haven't been here in so long... It has barely changed.",
+                "I remember how you could redeem your tickets for prizes at the desk here.",
+                "Looks like the power still works in some spots. Most of the wiring has probably burnt out by now.",
+                "Time to look around..."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono);
+
+        advanceObjective();
+
+        yield return new WaitUntil(() =>
+            HasFlag(StoryFlag.exploreArcade) &&
+            HasFlag(StoryFlag.talkMachines) &&
+            HasFlag(StoryFlag.talkMR)
+        );
+
+        yield return new WaitForSeconds(2f);
+
+        advanceObjective();
     }
 
 

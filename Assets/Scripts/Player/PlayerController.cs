@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     public bool bobEnabled = true;
     public float amplitude = 0.015f;
     public float frequency = 10f;
-    public float toggleSpeed = 3f;
+    public float toggleSpeed = 1f;
 
 
 

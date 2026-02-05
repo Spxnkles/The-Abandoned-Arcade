@@ -67,8 +67,10 @@ public class PlayerController : MonoBehaviour
 
 
         characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         defaultCameraPosition = playerCamera.transform.localPosition;
     }
@@ -81,6 +83,9 @@ public class PlayerController : MonoBehaviour
         cameraMovement();
         headMovement();
         resetHeadMovement();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void characterMovement()

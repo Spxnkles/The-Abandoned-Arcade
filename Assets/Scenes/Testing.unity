@@ -1955,6 +1955,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Staff_Door
       objectReference: {fileID: 0}
+    - target: {fileID: 3388982383957942133, guid: 16f75d15e3f197343b7607605e34f432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6434699724329636943, guid: 16f75d15e3f197343b7607605e34f432, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
@@ -1975,6 +1979,10 @@ PrefabInstance:
     - target: {fileID: 260531562014680916, guid: 90d366a4e05b0484491adca7cd6c0b91, type: 3}
       propertyPath: m_Name
       value: Double_Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 260531562014680916, guid: 90d366a4e05b0484491adca7cd6c0b91, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 636776386188148206, guid: 90d366a4e05b0484491adca7cd6c0b91, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2033,6 +2041,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door2
       objectReference: {fileID: 0}
+    - target: {fileID: 1526302895707011582, guid: 761eb3d0f2aff044a9077e47e0052bbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2190250016133899076, guid: 761eb3d0f2aff044a9077e47e0052bbf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.679
@@ -2089,6 +2101,10 @@ PrefabInstance:
     - target: {fileID: 5132572642984474911, guid: a58ed4976f72dec41a347f0dcafbb16b, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132572642984474911, guid: a58ed4976f72dec41a347f0dcafbb16b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5196983986742755975, guid: a58ed4976f72dec41a347f0dcafbb16b, type: 3}
       propertyPath: managedReferences[4268125313573585301].m_Value
@@ -2150,6 +2166,10 @@ PrefabInstance:
     - target: {fileID: 1439030447587954879, guid: f357ac921bf11524e8444c7e90900465, type: 3}
       propertyPath: m_Name
       value: Staff_Door2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1439030447587954879, guid: f357ac921bf11524e8444c7e90900465, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1779949061949082117, guid: f357ac921bf11524e8444c7e90900465, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2248,6 +2268,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 4507464971663344951, guid: 5c8909a7216736442bc653a2d8fe7e91, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2305,6 +2329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Women
       objectReference: {fileID: 0}
+    - target: {fileID: 7871331375592989501, guid: 6a29432323015144b9c025dd05a204a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2321,6 +2349,10 @@ PrefabInstance:
     - target: {fileID: 5886140245325428872, guid: 6baca7402c92d884198a916741c9308e, type: 3}
       propertyPath: m_Name
       value: Men
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886140245325428872, guid: 6baca7402c92d884198a916741c9308e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6549383884787737138, guid: 6baca7402c92d884198a916741c9308e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2419,6 +2451,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrontDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 8985316043806363778, guid: 65c54b5fd0d8b5d4198e1b482b9356f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2435,6 +2471,10 @@ PrefabInstance:
     - target: {fileID: 8124588199199474922, guid: 5ca91691008eba44dadd56faeabc6a4e, type: 3}
       propertyPath: m_Name
       value: RoomDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124588199199474922, guid: 5ca91691008eba44dadd56faeabc6a4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8902355629711941200, guid: 5ca91691008eba44dadd56faeabc6a4e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2492,6 +2532,10 @@ PrefabInstance:
     - target: {fileID: 8286775846708193717, guid: 0a24513f37a3b694db53c1edf3d6d84d, type: 3}
       propertyPath: m_Name
       value: Staff_Double_Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286775846708193717, guid: 0a24513f37a3b694db53c1edf3d6d84d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8668120961274639119, guid: 0a24513f37a3b694db53c1edf3d6d84d, type: 3}
       propertyPath: m_LocalPosition.x

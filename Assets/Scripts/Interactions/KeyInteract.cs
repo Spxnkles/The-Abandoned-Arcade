@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ public class KeyInteract : MonoBehaviour, IInteractable
     public string interactPrompt = "Press E to Pick Up";
 
     public AudioSource keySound;
+
+    [Header("Required Flags")]
+    public List<StoryFlag> requiredFlags = new List<StoryFlag>();
 
     [Header("Story")]
     public bool completeTask = false;
@@ -32,6 +36,15 @@ public class KeyInteract : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
+        foreach (StoryFlag flag in requiredFlags)
+        {
+            if (!StoryManager.Instance.HasFlag(flag))
+            {
+                canInteract = false;
+                return;
+            }
+        }
+
         if (storyBasedInteraction)
         {
             switch (storyState)

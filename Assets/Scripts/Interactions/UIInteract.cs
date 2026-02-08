@@ -105,6 +105,7 @@ public class UIInteract : MonoBehaviour, IInteractable
             content.localScale = initialContentScale;
 
             panel.gameObject.SetActive(false);
+            Advance();
         }
     }
 
@@ -178,6 +179,7 @@ public class UIInteract : MonoBehaviour, IInteractable
 
         if (addFlag)
         {
+            addFlag = false;
             StoryManager.Instance.AddFlag(flag);
         }
     }

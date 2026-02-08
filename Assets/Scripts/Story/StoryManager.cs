@@ -212,7 +212,7 @@ public class StoryManager : MonoBehaviour
         });
         objectives.Add(new Objective
         {
-            stageID = 9,
+            stageID = 10,
             title = "Staff Room",
             tasks = new Task[]
             {
@@ -221,11 +221,20 @@ public class StoryManager : MonoBehaviour
         });
         objectives.Add(new Objective
         {
-            stageID = 9,
-            title = "Staff Room",
+            stageID = 11,
+            title = "Mysterious Room",
             tasks = new Task[]
             {
-                new Task {id = "staffInspect", text = "Inspect the room"}
+                new Task {id = "MRkey", text = "Try the key"}
+            }
+        });
+        objectives.Add(new Objective
+        {
+            stageID = 12,
+            title = "Unknown Scream",
+            tasks = new Task[]
+            {
+                new Task {id = "smic", text = "Save Michael"}
             }
         });
     }
@@ -616,7 +625,7 @@ public class StoryManager : MonoBehaviour
                 "Time to look around..."
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono);
 
         advanceObjective();
 
@@ -626,13 +635,63 @@ public class StoryManager : MonoBehaviour
             HasFlag(StoryFlag.talkMR)
         );
 
-        yield return new WaitForSeconds(2f);
-
         advanceObjective();
 
         yield return new WaitUntil(() => HasFlag(StoryFlag.enterStaff));
 
+        Speech[] mono2 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "A staff room... so this is why the employees spent so much time in here.",
+                "Maybe I can find something useful in here."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono2);
+        AddFlag(StoryFlag.talkStaff);
 
+        advanceObjective();
+
+        yield return new WaitUntil(() => HasFlag(StoryFlag.readPaper));
+
+        Speech[] mono5 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "Could this be why the arcade shut down?"
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono5);
+
+        yield return new WaitUntil(() => checkTaskCompletion());
+        ObjectiveManager.Instance.hideObjective();
+
+        Speech[] mono3 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "Maybe this key belongs to the room..."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono3);
+
+        advanceObjective();
+
+        yield return new WaitUntil(() => HasFlag(StoryFlag.screamWalk));
+
+        GameObject.Find("Scream").GetComponent<ObjectAudio>().PlaySound();
+
+        yield return new WaitForSeconds(2.5f);
+
+        Speech[] mono4 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "W-was that Michael?",
+                "Oh god... I need to go help him."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono4);
 
         advanceObjective();
     }

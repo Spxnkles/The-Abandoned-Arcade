@@ -5,5 +5,9 @@ public enum StoryFlag
     exploreArcade,
     talkMachines,
     talkMR,
-    enterStaff
+    enterStaff,
+    readPaper,
+    readNotebook,
+    screamWalk,
+    talkStaff
 }

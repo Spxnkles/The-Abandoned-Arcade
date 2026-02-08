@@ -3506,6 +3506,7 @@ MonoBehaviour:
   key: 1
   interactPrompt: Press E to Pick Up
   keySound: {fileID: 1078156266}
+  requiredFlags: 
   completeTask: 0
   taskID: 
   storyBasedInteraction: 1
@@ -6268,6 +6269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectAudio
   audioSource: {fileID: 1451905583}
   audioClip: {fileID: 8300000, guid: 8af0cf578a63edf46aeafd29c3c0af96, type: 3}
+  testPlay: 0
 --- !u!4 &1026202023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 513d56545cb973f4fad01455ebc3d7c9, type: 3}
@@ -7130,6 +7132,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 434962768882153867, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 549341770716013043, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7186,10 +7192,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357248808594410424, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4712993143883525566, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7225,6 +7227,10 @@ PrefabInstance:
     - target: {fileID: 5508047277091553443, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222126200454461424, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6483714267865717648, guid: 49b7fa6730b2e1a4da905e2933dc5202, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8356,6 +8362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectAudio
   audioSource: {fileID: 2078053910}
   audioClip: {fileID: 8300000, guid: abd318630b2ecf545911e06ebebbd417, type: 3}
+  testPlay: 0
 --- !u!4 &1365646096
 Transform:
   m_ObjectHideFlags: 0
@@ -9752,6 +9759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectAudio
   audioSource: {fileID: 193238838}
   audioClip: {fileID: 8300000, guid: a35e99529c28b5f4488e3b0986a477be, type: 3}
+  testPlay: 0
 --- !u!4 &1477270449
 Transform:
   m_ObjectHideFlags: 0
@@ -9971,6 +9979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectAudio
   audioSource: {fileID: 1531087485}
   audioClip: {fileID: 8300000, guid: 754c4bfd3ee8cc048814fc146a7a4920, type: 3}
+  testPlay: 0
 --- !u!82 &1531087485
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11429,6 +11438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectAudio
   audioSource: {fileID: 809656667}
   audioClip: {fileID: 8300000, guid: d92af186f1b22db4a8e9133ea8fb85f0, type: 3}
+  testPlay: 0
 --- !u!4 &1759629280 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 006d4cd0a5bfa894f8af92599c9bd48a, type: 3}
@@ -12412,10 +12422,6 @@ PrefabInstance:
       value: StoryManager
       objectReference: {fileID: 0}
     - target: {fileID: 6785351799633207319, guid: 9fc2a5d83929bce418023030a1579146, type: 3}
-      propertyPath: debugMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6785351799633207319, guid: 9fc2a5d83929bce418023030a1579146, type: 3}
       propertyPath: transitionAnimator
       value: 
       objectReference: {fileID: 408567234}
@@ -12472,9 +12478,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1993062785}
     - target: {fileID: 8063506012741842764, guid: 9fc2a5d83929bce418023030a1579146, type: 3}
+      propertyPath: charDelay
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8063506012741842764, guid: 9fc2a5d83929bce418023030a1579146, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1893277652}
+    - target: {fileID: 8063506012741842764, guid: 9fc2a5d83929bce418023030a1579146, type: 3}
+      propertyPath: sentenceDelay
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8302410011616497733, guid: 9fc2a5d83929bce418023030a1579146, type: 3}
       propertyPath: title
       value: 

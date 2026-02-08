@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 
 public class DialogueManager : MonoBehaviour
 {
+    public float charDelay = 0.05f;
+    public float sentenceDelay = 1f;
+
     public static DialogueManager Instance;
     public GameObject icon;
     public TextMeshProUGUI title;
@@ -53,10 +56,10 @@ public class DialogueManager : MonoBehaviour
                     speech.maxVisibleCharacters = i;
                     playRandomAudio();
 
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(charDelay);
                 }
 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(sentenceDelay);
             }
         }
 

@@ -237,6 +237,24 @@ public class StoryManager : MonoBehaviour
                 new Task {id = "smic", text = "Save Michael"}
             }
         });
+        objectives.Add(new Objective
+        {
+            stageID = 13,
+            title = "Maintenance Room - Investigate",
+            tasks = new Task[]
+            {
+                new Task {id = "mrinv", text = "Search the room"}
+            }
+        });
+        objectives.Add(new Objective
+        {
+            stageID = 14,
+            title = "Find the source of the scream",
+            tasks = new Task[]
+            {
+                new Task {id = "ckdoor", text = "Check the door at the back"}
+            }
+        });
     }
 
     #endregion
@@ -693,7 +711,80 @@ public class StoryManager : MonoBehaviour
         };
         yield return DialogueManager.Instance.PlayDialogue(mono4);
 
+        // save michael task 12
         advanceObjective();
+
+        // player enters the maintenance room
+        yield return new WaitUntil(() => checkTaskCompletion());
+        ObjectiveManager.Instance.hideObjective();
+
+        Speech[] mono6 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "This must be the maintenance room... tools and machines everywhere. Looks like it hasn't been touched in years.",
+                "That scream... it came from somewhere close. Michael, where are you?"
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono6);
+
+        // investigate mr task 13
+        advanceObjective();
+
+        // wait for player to read notebook
+        yield return new WaitUntil(() => HasFlag(StoryFlag.readNotebook));
+
+        Speech[] mono7 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "Someone worked here... December 1986. They were scared of the owner.",
+                "A blood stain on a machine... a weird smell from the locked room at the back...",
+                "'I've never been back there, nor have I seen anyone go in there... there's always this weird warmth...'",
+                "That's... unsettling. Whatever was happening here, it wasn't normal."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono7);
+
+        yield return new WaitForSeconds(1f);
+
+        Speech[] mono8 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "Wait... The smell. The locked room. The scream. It must have come from...",
+                "that exact room...",
+                "...",
+                "I need to get in there and help him!"
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono8);
+
+        // advance to task 14 door
+        advanceObjective();
+
+        yield return new WaitUntil(() => checkTaskCompletion());
+        ObjectiveManager.Instance.hideObjective();
+        PlayerController.Instance.freeze = true;
+
+        Speech[] mono9 = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
+            {
+                "The door... it was unlocked. There's a staircase going down.",
+                "It's completely dark down there.",
+                "Michael!",
+                "...",
+                "...no response.",
+                "I have to go down."
+            }},
+        };
+        yield return DialogueManager.Instance.PlayDialogue(mono9);
+
+        PlayerController.Instance.sprintingEnabled = false;
+        PlayerController.Instance.walkSpeed = PlayerController.Instance.walkSpeed * 0.5f;
+        PlayerController.Instance.freeze = false;
+
     }
 
 

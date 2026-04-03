@@ -92,8 +92,8 @@ public class PlayerController : MonoBehaviour
 
         // If player can move, multiply movement speed by axis on which player is moving.
         // Ability to adjust movement speed on controllers thanks to decimal value from joytick input
-        float movementX = canMove ? (sprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
-        float movementY = canMove ? (sprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
+        float movementX = canMove ? (sprinting && sprintingEnabled ? sprintSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
+        float movementY = canMove ? (sprinting && sprintingEnabled ? sprintSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
 
         float movementDirectionY = moveDirection.y;
 

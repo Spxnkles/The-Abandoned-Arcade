@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -36,8 +37,8 @@ public class Door : MonoBehaviour, IInteractable
     public bool allowInteraction = true;
     public int stageID = -1;
 
-
-    private bool isOpen = false;
+    [Header("Control")]
+    public bool isOpen = false;
     private bool canInteract = true;
     private Quaternion openRotation;
     private Quaternion closedRotation;
@@ -123,6 +124,27 @@ public class Door : MonoBehaviour, IInteractable
             completeTask = false;
             StoryManager.Instance.advanceTask(taskID);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Killer")) return;
+
+        if (!isOpen)
+        {
+            isOpen = true;
+            if (openAudio != null) audioSource.PlayOneShot(openAudio);
+        }
+
+        StopAllCoroutines();
+        StartCoroutine(CloseAfterDelay());
+    }
+
+    private IEnumerator CloseAfterDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        isOpen = false;
+        if (closeAudio != null) audioSource.PlayOneShot(closeAudio);
     }
 
     public string GetPrompt()

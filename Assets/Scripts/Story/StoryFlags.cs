@@ -9,5 +9,7 @@ public enum StoryFlag
     readPaper,
     readNotebook,
     screamWalk,
-    talkStaff
+    talkStaff,
+    basement,
+    exploreMR
 }

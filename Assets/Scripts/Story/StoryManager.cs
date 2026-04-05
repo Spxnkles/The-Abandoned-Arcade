@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class StoryManager : MonoBehaviour
 {
@@ -33,7 +35,9 @@ public class StoryManager : MonoBehaviour
     // You, the main character
     public Character mainCharacter = new Character() { name = "You", speechColor = Color.lightBlue };
         // Friend Michael
-    public  Character michael = new Character() { name = "Michael", speechColor = Color.softRed };
+    public Character michael = new Character() { name = "Michael", speechColor = Color.yellowNice };
+    // killer
+    public Character killer = new Character() { name = "???", speechColor = Color.softRed };
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -110,6 +114,32 @@ public class StoryManager : MonoBehaviour
         PlayerController.Instance.freeze = false;
         transitionAnimator.SetBool("loading", false);
         yield return new WaitForSeconds(1f);
+    }
+
+    private IEnumerator MovePlayerToPosition(Vector3 targetPos, Quaternion targetRot, Quaternion targetCamRot, float duration)
+    {
+        Vector3 startPos = PlayerController.Instance.transform.position;
+        Quaternion startRot = PlayerController.Instance.transform.localRotation;
+        Quaternion startCamRot = PlayerController.Instance.playerCamera.transform.localRotation;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
+
+            PlayerController.Instance.transform.position = Vector3.Lerp(startPos, targetPos, t);
+            PlayerController.Instance.transform.localRotation = Quaternion.Slerp(startRot, targetRot, t);
+            PlayerController.Instance.playerCamera.transform.localRotation = Quaternion.Slerp(startCamRot, targetCamRot, t);
+
+            yield return null;
+        }
+
+
+        PlayerController.Instance.transform.position = targetPos;
+        PlayerController.Instance.transform.localRotation = targetRot;
+        PlayerController.Instance.playerCamera.transform.localRotation = targetCamRot;
     }
 
     #endregion
@@ -665,7 +695,7 @@ public class StoryManager : MonoBehaviour
                 "Maybe I can find something useful in here."
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono2);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono2);
         AddFlag(StoryFlag.talkStaff);
 
         advanceObjective();
@@ -679,7 +709,7 @@ public class StoryManager : MonoBehaviour
                 "Could this be why the arcade shut down?"
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono5);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono5);
 
         yield return new WaitUntil(() => checkTaskCompletion());
         ObjectiveManager.Instance.hideObjective();
@@ -691,7 +721,7 @@ public class StoryManager : MonoBehaviour
                 "Maybe this key belongs to the room..."
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono3);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono3);
 
         advanceObjective();
 
@@ -709,7 +739,7 @@ public class StoryManager : MonoBehaviour
                 "Oh god... I need to go help him."
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono4);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono4);
 
         // save michael task 12
         advanceObjective();
@@ -726,7 +756,7 @@ public class StoryManager : MonoBehaviour
                 "That scream... it came from somewhere close. Michael, where are you?"
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono6);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono6);
 
         // investigate mr task 13
         advanceObjective();
@@ -744,21 +774,23 @@ public class StoryManager : MonoBehaviour
                 "That's... unsettling. Whatever was happening here, it wasn't normal."
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono7);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono7);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+
+        yield return new WaitUntil(() => HasFlag(StoryFlag.exploreMR));
 
         Speech[] mono8 = new Speech[]
         {
             new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[]
             {
-                "Wait... The smell. The locked room. The scream. It must have come from...",
-                "that exact room...",
+                "Wait... The smell and the locked room. The scream... It must have come from...",
+                "that room...",
                 "...",
                 "I need to get in there and help him!"
             }},
         };
-        yield return DialogueManager.Instance.PlayDialogue(mono8);
+        if (!debugMode) yield return DialogueManager.Instance.PlayDialogue(mono8);
 
         // advance to task 14 door
         advanceObjective();
@@ -782,10 +814,50 @@ public class StoryManager : MonoBehaviour
         yield return DialogueManager.Instance.PlayDialogue(mono9);
 
         PlayerController.Instance.sprintingEnabled = false;
-        PlayerController.Instance.walkSpeed = PlayerController.Instance.walkSpeed * 0.5f;
+        PlayerController.Instance.walkSpeed = PlayerController.Instance.walkSpeed * 2/3;
         PlayerController.Instance.freeze = false;
 
+        yield return new WaitUntil(() => HasFlag(StoryFlag.basement));
+
+
+        PlayerController.Instance.freeze = true;
+        // moves player to a position and waits till its done so we can start dialogue and then the chase sequence
+        yield return MovePlayerToPosition(
+            new Vector3(-33.89117f, -2.359681f, 11.98751f),
+            Quaternion.Euler(0f, 145.75f, 0f),
+            Quaternion.Euler(3.75f, 0f, 0f),
+            2f
+        );
+
+
+
+        Speech[] dialogue = new Speech[]
+        {
+            new Speech() {title = mainCharacter.name, color = mainCharacter.speechColor, speeches = new string[] { "What the hell...", "Who is that?", "What is he doing?"}}
+        };
+        yield return DialogueManager.Instance.PlayDialogue(dialogue);
+
+        Killer killerObject = GameObject.Find("Enemy").GetComponent<Killer>();
+
+        yield return killerObject.NoticePlayer(2f);
+
+        Speech[] dialogue2 = new Speech[]
+        {
+            new Speech() {title = "???", color = killer.speechColor, speeches = new string[] { "Well, well, well...", "I've been waiting for you."}},
+            new Speech() {title = "", color = michael.speechColor, speeches = new string[] { "RUN!"} }
+        };
+        yield return DialogueManager.Instance.PlayDialogue(dialogue2);
+
+        // start chase scene
+        PlayerController.Instance.sprintingEnabled = true;
+        PlayerController.Instance.walkSpeed = PlayerController.Instance.walkSpeed * 3 / 2;
+        PlayerController.Instance.freeze = false;
+
+        killerObject.agent.BlackboardReference.SetVariableValue("chase", true);
+        killerObject.agent.BlackboardReference.SetVariableValue("Target", GameObject.Find("Player"));
     }
+
+
 
 
     #endregion

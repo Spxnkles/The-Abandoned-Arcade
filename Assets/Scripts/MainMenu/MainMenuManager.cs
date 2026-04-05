@@ -9,7 +9,7 @@ public class MainMenuManager : MonoBehaviour
     public void startGame()
     {
         playClick();
-        SceneManager.LoadScene("Home");
+        SceneManager.LoadScene("House");
     }
 
     public void showSettings()

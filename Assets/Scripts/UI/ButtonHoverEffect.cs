@@ -12,6 +12,7 @@ public class ButtonHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("Pointer enter!");
         if (TextMeshProUGUI != null && hoverMaterial != null && hoverSound != null)
         {
             TextMeshProUGUI.fontMaterial = hoverMaterial;
